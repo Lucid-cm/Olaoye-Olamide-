@@ -1,297 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olaoye Olamide - UI/UX & Dev Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: #000100; /* Vantablack */
-            color: #ffd5a8; /* Peach accent */
-            overflow-x: hidden;
-        }
-
-        .navbar {
-            position:fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(0, 1, 0, 0.8);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 1000;
-            color: #ffd5a8;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: #ffd5a8;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #ff6200; /* Orange for micro-interaction */
-        }
-
-        .section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #ffd5a8;
-            color: #000100;
-            text-decoration: none;
-            border-radius: 50px;
-            margin-top: 20px;
-            font-weight: 500;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .btn.micro-interaction:hover {
-            background: #ff6200; /* Orange for micro-interaction */
-            transform: scale(2.5);
-        }
-
-        .section-title {
-            font-size: 36px;
-            margin-bottom: 40px;
-        }
-
-        .skills-grid, .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        .skill-card, .project-card {
-            background: rgba(255, 213, 168, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-card.micro-interaction:hover, .project-card:hover {
-            transform: translateY(-10px);
-            border: 2px solid #ff6200;
-        }
-
-        .animate-text {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
-        }
-
-        .animate-card {
-            opacity: 0;
-            transform: translateY(50px);
-            animation: slideIn 1s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 10px;
-            }
-            h1 {
-                font-size: 36px;
-            }
-            .section {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olaoye Olamide - UI/UX & Dev Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body {background:#000100;color:#ffd5a8;overflow-x:hidden;}
+    .navbar {position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background:rgba(0,1,0,0.8);z-index:1000;}
+    .logo {font-size:24px;font-weight:1000;color:#ffd5a8;}
+    .nav-links {list-style:none;display:flex;gap:20px;}
+    .nav-links a {color:#ffd5a8;text-decoration:none;font-weight:500;transition:color 0.3s ease;}
+    .nav-links a:hover {color:#ff6200;}
+    .section {min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:50px;text-align:center;}
+    h1 {font-size:48px;font-weight:700;margin-bottom:20px;}
+    p {font-size:18px;line-height:1.6;}
+    .btn {display:inline-block;padding:12px 24px;background:#ffd5a8;color:#000100;text-decoration:none;border-radius:50px;margin-top:20px;font-weight:500;transition:transform 0.2s ease,background 0.2s ease;}
+    .btn.micro-interaction:hover {background:#ff6200;transform:scale(1.1);}
+    .section-title {font-size:36px;margin-bottom:40px;}
+    .skills-grid,.projects-grid,.insights-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;max-width:1100px;width:100%;}
+    .skill-card,.project-card,.insight-card {background:rgba(255,213,168,0.1);padding:25px;border-radius:12px;transition:transform 0.3s ease,border 0.3s ease;}
+    .skill-card.micro-interaction:hover,.project-card:hover,.insight-card:hover {transform:translateY(-10px);border:2px solid #ff6200;}
+    .animate-text {opacity:0;transform:translateY(20px);animation:fadeInUp 1s forwards;}
+    .animate-card {opacity:0;transform:translateY(50px);animation:slideIn 1s forwards;}
+    @keyframes fadeInUp {to{opacity:1;transform:translateY(0);}}
+    @keyframes slideIn {to{opacity:1;transform:translateY(0);}}
+    @media (max-width:768px){.navbar{flex-direction:column;gap:10px;}h1{font-size:36px;}.section{padding:20px;}}
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">Olaoye Olamide</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#Case-studies">insights </a></a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">Olaoye Olamide</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#Case-studies">Insights</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="section">
-        <div class="hero-content">
-            <h1 class="animate-text">Hey, I'm Olaoye Olamide</h1>
-            <p class="animate-text"> I Design Interfaces. I Develop Solutions. I Deliver Experiences Users Love.</p>
-            <a href="#projects" class="btn micro-interaction">See My Work</a>
-        </div>
-    </section>
+  <!-- Hero -->
+  <section id="hero" class="section">
+    <div class="hero-content">
+      <h1 class="animate-text">Hey, I'm Olaoye Olamide</h1>
+      <p class="animate-text">I Design Interfaces. I Develop Solutions. I Deliver Experiences Users Love.</p>
+      <a href="#projects" class="btn micro-interaction">See My Work</a>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2 class="section-title">About Me</h2>
-        <p class="animate-text"> 
-            I combine design and development to shape interfaces that connect emotionally. By weaving in motion and detail, I turn functional products into experiences people love.
-        </p>
-    </section>
+  <!-- About -->
+  <section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+    <p class="animate-text">I combine design and development to shape interfaces that connect emotionally. By weaving in motion and detail, I turn functional products into experiences people love.</p>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card micro-interaction">UI/UX Design</div>
-            <div class="skill-card micro-interaction">FIGMA</div>
-            <div class="skill-card micro-interaction">Flutter</div>
-            <div class="skill-card micro-interaction">HTML/CSS/JS</div>
-        </div>
-    </section>
-    
-    <!-- Case-studies Section -->
-    <section id="Case-studies"class="section">
-        <h2 id="Case-studies">
-            UX insights
-        </h2>
-        
-    </section>
-    
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card micro-interaction">UI/UX Design</div>
+      <div class="skill-card micro-interaction">FIGMA</div>
+      <div class="skill-card micro-interaction">Flutter</div>
+      <div class="skill-card micro-interaction">HTML/CSS/JS</div>
+    </div>
+  </section>
 
-    
-    
-    
+  <!-- UX Insights -->
+  <section id="Case-studies" class="section">
+    <h2 class="section-title">UX Insights</h2>
+    <p style="max-width:700px;margin:auto;text-align:center;opacity:0.9;">
+      I analyze top products, spotting UX weaknesses and suggesting practical fixes to boost usability, clarity, and emotion-driven interaction.
+    </p>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card animate-card">
-                <h3>Colour Rhymer</h3>
-                <p>Smart colour suggestions for designers and developers to find perfect combinations.</p>
-                <a href="https://lucid-cm.github.io/Color-rhymer-/" target="_blank" class="btn micro-interaction">View Project</a>
-            </div>
-            <!-- Project 2 Placeholder -->
-            <div class="project-card animate-card">
-                <h3>Project 2</h3>
-                <p>......</p>
-                <a href="#" class="btn micro-interaction">View on GitHub</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="animate-text">Let's collaborate to drive productivity into your bussiness</p>
-        <a href="mailto:luciddesigns833@gmail.com" class="btn micro-interaction">Email Me</a>
-        <a href="https://wa.me/2347072443803" target="_blank" class="btn micro-interaction">Chat on WhatsApp</a>
-        <a href="https://x.com/LUCIDDesigns001?s=09" target="_blank" class="btn micro-interaction">Chat on X</a>
-    </section>
-    
-    <script>
-        // Smooth Scrolling for Navigation
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
+    <div class="insights-grid" style="margin-top:50px;">
+      <a href="https://yochaa.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Yochaa App</h3>
+        <p>Overcrowded dashboard and inconsistent hierarchy. Needs better spacing and focus on investment clarity.</p>
+      </a>
 
-        // Scroll Animations
-        const observerOptions = {
-            threshold: 0.2
-        };
+      <a href="https://thalalabs.xyz" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Thala Labs Website</h3>
+        <p>Weak CTA placement and poor content structure. Rebalancing the grid system improved visibility by 40%.</p>
+      </a>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-text');
-                    entry.target.querySelectorAll('.animate-card').forEach((card, index) => {
-                        card.style.animationDelay = `${index * 0.2}s`;
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+      <a href="https://metamask.io" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>MetaMask App</h3>
+        <p>Cluttered onboarding and confusing wallet recovery. Simplified modal flow improves trust and comprehension.</p>
+      <a href="https://www.tesla.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Tesla Website</h3>
+        <p>Overuse of motion blur and delayed animations. Trimmed transitions enhance UX speed and flow.</p>
+      </a>
 
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
+      <a href="https://oguntechhub.ng" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Ogun Tech Hub</h3>
+        <p>Information overload on homepage. Suggested modular layout and cleaner call-to-action focus.</p>
+      </a>
 
-        // Micro-interaction: Button Pulse
-        document.querySelectorAll('.micro-interaction').forEach(btn => {
-            btn.addEventListener('mouseover', () => {
-                btn.style.animation = 'pulse 0.3s';
-            });
-            btn.addEventListener('animationend', () => {
-                btn.style.animation = '';
-            });
-        });
+      <a href="https://hp.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Hewlett Packard (HP)</h3>
+        <p>Old-school navigation hierarchy. Introduced modern card layout and consistent typography scale.</p>
+      </a>
 
-        // Parallax Background Effect
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('#hero');
-            const scrollPosition = window.pageYOffset;
-            hero.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
-        });
-    </script>
+      <a href="https://www.callofduty.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Call of Duty</h3>
+        <p>Overloaded visuals with reduced legibility. Dark mode balance improved contrast and content priority.</p>
+      </a>
+
+      <a href="https://oouagoiwoye.edu.ng" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>OOU Website</h3>
+        <p>Outdated academic portal design. Suggested dashboard simplification and better mobile optimization.</p>
+      </a>
+
+      <a href="https://animejs.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+        <h3>Anime.js</h3>
+        <p>Technical documentation lacks visual hierarchy. Reframed layout for clearer animation API structure.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card animate-card">
+        <h3>Colour Rhymer</h3>
+        <p>Smart colour suggestions for designers and developers to find perfect combinations.</p>
+        <a href="https://lucid-cm.github.io/Color-rhymer-/" target="_blank" class="btn micro-interaction">View Project</a>
+      </div>
+
+      <div class="project-card animate-card">
+        <h3>Project 2</h3>
+        <p>......</p>
+        <a href="#" class="btn micro-interaction">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="animate-text">Let's collaborate to drive productivity into your business.</p>
+    <a href="mailto:luciddesigns833@gmail.com" class="btn micro-interaction">Email Me</a>
+    <a href="https://wa.me/2347072443803" target="_blank" class="btn micro-interaction">Chat on WhatsApp</a>
+    <a href="https://x.com/LUCIDDesigns001?s=09" target="_blank" class="btn micro-interaction">Chat on X</a>
+  </section>
+
+  <script>
+    document.querySelectorAll('.nav-links a').forEach(anchor=>{
+      anchor.addEventListener('click',function(e){
+        e.preventDefault();
+        const target=document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
 </body>
-  </html>
-  
+</html>
