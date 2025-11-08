@@ -6,30 +6,230 @@
   <title>Olaoye Olamide - UI/UX & Dev Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-    body {background:#000100;color:#ffd5a8;overflow-x:hidden;}
-    .navbar {position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background:rgba(0,1,0,0.8);z-index:1000;}
-    .logo {font-size:24px;font-weight:1000;color:#ffd5a8;}
-    .nav-links {list-style:none;display:flex;gap:20px;}
-    .nav-links a {color:#ffd5a8;text-decoration:none;font-weight:500;transition:color 0.3s ease;}
-    .nav-links a:hover {color:#ff6200;}
-    .section {min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:50px;text-align:center;}
-    h1 {font-size:48px;font-weight:700;margin-bottom:20px;}
-    p {font-size:18px;line-height:1.6;}
-    .btn {display:inline-block;padding:12px 24px;background:#ffd5a8;color:#000100;text-decoration:none;border-radius:50px;margin-top:20px;font-weight:500;transition:transform 0.2s ease,background 0.2s ease;}
-    .btn.micro-interaction:hover {background:#ff6200;transform:scale(1.1);}
-    .section-title {font-size:36px;margin-bottom:40px;}
-    .skills-grid,.projects-grid,.insights-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;max-width:1100px;width:100%;}
-    .skill-card,.project-card,.insight-card {background:rgba(255,213,168,0.1);padding:25px;border-radius:12px;transition:transform 0.3s ease,border 0.3s ease;}
-    .skill-card.micro-interaction:hover,.project-card:hover,.insight-card:hover {transform:translateY(-10px);border:2px solid #ff6200;}
-    .animate-text {opacity:0;transform:translateY(20px);animation:fadeInUp 1s forwards;}
-    .animate-card {opacity:0;transform:translateY(50px);animation:slideIn 1s forwards;}
-    @keyframes fadeInUp {to{opacity:1;transform:translateY(0);}}
-    @keyframes slideIn {to{opacity:1;transform:translateY(0);}}
-    @media (max-width:768px){.navbar{flex-direction:column;gap:10px;}h1{font-size:36px;}.section{padding:20px;}}
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #000100;
+      color: #ffd5a8;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      line-height: 1.7;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 70px;
+      background: rgba(0, 1, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #ffd5a8;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #ffd5a8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      opacity: 0.85;
+      transition: color 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ff6200;
+      opacity: 1;
+    }
+
+    /* Sections */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 54px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      letter-spacing: 0.5px;
+    }
+
+    h2.section-title {
+      font-size: 40px;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    h2.section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #ff6200;
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+
+    p {
+      font-size: 18px;
+      max-width: 750px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #ffd5a8;
+      color: #000100;
+      text-decoration: none;
+      border-radius: 50px;
+      margin-top: 30px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn.micro-interaction:hover {
+      background: #ff6200;
+      transform: scale(1.08);
+    }
+
+    /* Grids */
+    .skills-grid, .projects-grid, .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .skill-card, .project-card {
+      background: rgba(255, 213, 168, 0.08);
+      padding: 30px 25px;
+      border-radius: 14px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+      text-align: center;
+    }
+
+    .skill-card.micro-interaction:hover,
+    .project-card:hover {
+      transform: translateY(-10px);
+      border: 1.5px solid #ff6200;
+      background: rgba(255, 213, 168, 0.12);
+    }
+
+    /* UX Insights Cards */
+    .insight-card {
+      background: linear-gradient(145deg, rgba(255,213,168,0.05), rgba(255,213,168,0.1));
+      border-left: 5px solid #ff6200;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+      text-align: left;
+    }
+
+    .insight-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #ffd5a8;
+    }
+
+    .insight-card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #ffe5b3;
+      opacity: 0.95;
+    }
+
+    .insight-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(255, 98, 0, 0.4);
+      background: linear-gradient(145deg, rgba(255,213,168,0.1), rgba(255,213,168,0.15));
+    }
+
+    /* Remove default link styles in insight cards */
+    .insight-card, .insight-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .insight-card a:hover {
+      color: #ff6200;
+    }
+
+    /* Animations */
+    .animate-text {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    .visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .section {
+        padding: 90px 20px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .insight-card {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="logo">Olaoye Olamide</div>
@@ -43,79 +243,69 @@
 
   <!-- Hero -->
   <section id="hero" class="section">
-    <div class="hero-content">
-      <h1 class="animate-text">Hey, I'm Olaoye Olamide</h1>
-      <p class="animate-text">I Design Interfaces. I Develop Solutions. I Deliver Experiences Users Love.</p>
+    <div class="hero-content animate-text">
+      <h1>Hey, I'm Olaoye Olamide</h1>
+      <p>I Design Interfaces. I Develop Solutions. I Deliver Experiences Users Love.</p>
       <a href="#projects" class="btn micro-interaction">See My Work</a>
     </div>
   </section>
 
   <!-- About -->
-  <section id="about" class="section">
+  <section id="about" class="section animate-text">
     <h2 class="section-title">About Me</h2>
-    <p class="animate-text">I combine design and development to shape interfaces that connect emotionally. By weaving in motion and detail, I turn functional products into experiences people love.</p>
+    <p>I combine design and development to shape interfaces that connect emotionally. By weaving in motion and detail, I turn functional products into experiences people love.</p>
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="section">
+  <section id="skills" class="section animate-text">
     <h2 class="section-title">Skills</h2>
     <div class="skills-grid">
       <div class="skill-card micro-interaction">UI/UX Design</div>
       <div class="skill-card micro-interaction">FIGMA</div>
       <div class="skill-card micro-interaction">Flutter</div>
       <div class="skill-card micro-interaction">HTML/CSS/JS</div>
-    </div>
       <div class="skill-card micro-interaction">Web3</div>
+    </div>
   </section>
-    
 
   <!-- UX Insights -->
-  <section id="Case-studies" class="section">
+  <section id="Case-studies" class="section animate-text">
     <h2 class="section-title">UX Insights</h2>
-    <p style="max-width:700px;margin:auto;text-align:center;opacity:0.9;">
-      I analyze top products, spotting UX weaknesses and suggesting practical fixes to boost usability, clarity, and emotion-driven interaction.
-    </p>
-
-    <div class="insights-grid" style="margin-top:50px;">
-      <a href="https://yochaa.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+    <p>I analyze top products, spotting UX weaknesses and suggesting practical fixes to boost usability, clarity, and emotion-driven interaction.</p>
+    <div class="insights-grid">
+      <a href="https://yochaa.com" target="_blank" class="insight-card">
         <h3>Yochaa App</h3>
         <p>Overcrowded dashboard and inconsistent hierarchy. Needs better spacing and focus on investment clarity.</p>
       </a>
-
-      <a href="https://thalalabs.xyz" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://thalalabs.xyz" target="_blank" class="insight-card">
         <h3>Thala Labs Website</h3>
         <p>Weak CTA placement and poor content structure. Rebalancing the grid system improved visibility by 40%.</p>
       </a>
-
-      <a href="https://metamask.io" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://metamask.io" target="_blank" class="insight-card">
         <h3>MetaMask App</h3>
         <p>Cluttered onboarding and confusing wallet recovery. Simplified modal flow improves trust and comprehension.</p>
-      <a href="https://www.tesla.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      </a>
+      <a href="https://www.tesla.com" target="_blank" class="insight-card">
         <h3>Tesla Website</h3>
         <p>Overuse of motion blur and delayed animations. Trimmed transitions enhance UX speed and flow.</p>
       </a>
-
-      <a href="https://oguntechhub.ng" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://oguntechhub.ng" target="_blank" class="insight-card">
         <h3>Ogun Tech Hub</h3>
         <p>Information overload on homepage. Suggested modular layout and cleaner call-to-action focus.</p>
       </a>
-
-      <a href="https://hp.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://hp.com" target="_blank" class="insight-card">
         <h3>Hewlett Packard (HP)</h3>
         <p>Old-school navigation hierarchy. Introduced modern card layout and consistent typography scale.</p>
       </a>
-
-      <a href="https://www.callofduty.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://www.callofduty.com" target="_blank" class="insight-card">
         <h3>Call of Duty</h3>
         <p>Overloaded visuals with reduced legibility. Dark mode balance improved contrast and content priority.</p>
       </a>
-
-      <a href="https://oouagoiwoye.edu.ng" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://oouagoiwoye.edu.ng" target="_blank" class="insight-card">
         <h3>OOU Website</h3>
         <p>Outdated academic portal design. Suggested dashboard simplification and better mobile optimization.</p>
       </a>
-
-      <a href="https://animejs.com" target="_blank" class="insight-card animate-card" style="text-decoration:none;color:inherit;">
+      <a href="https://animejs.com" target="_blank" class="insight-card">
         <h3>Anime.js</h3>
         <p>Technical documentation lacks visual hierarchy. Reframed layout for clearer animation API structure.</p>
       </a>
@@ -123,16 +313,16 @@
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="section">
+  <section id="projects" class="section animate-text">
     <h2 class="section-title">Projects</h2>
     <div class="projects-grid">
-      <div class="project-card animate-card">
+      <div class="project-card">
         <h3>Colour Rhymer</h3>
         <p>Smart colour suggestions for designers and developers to find perfect combinations.</p>
         <a href="https://lucid-cm.github.io/Color-rhymer-/" target="_blank" class="btn micro-interaction">View Project</a>
       </div>
 
-      <div class="project-card animate-card">
+      <div class="project-card">
         <h3>Project 2</h3>
         <p>......</p>
         <a href="#" class="btn micro-interaction">View on GitHub</a>
@@ -141,22 +331,38 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section">
+  <section id="contact" class="section animate-text">
     <h2 class="section-title">Get in Touch</h2>
-    <p class="animate-text">Let's collaborate to drive productivity into your business.</p>
+    <p>Let's collaborate to drive productivity into your business.</p>
     <a href="mailto:luciddesigns833@gmail.com" class="btn micro-interaction">Email Me</a>
     <a href="https://wa.me/2347072443803" target="_blank" class="btn micro-interaction">Chat on WhatsApp</a>
     <a href="https://x.com/LUCIDDesigns001?s=09" target="_blank" class="btn micro-interaction">Chat on X</a>
   </section>
 
+  <!-- Scripts -->
   <script>
-    document.querySelectorAll('.nav-links a').forEach(anchor=>{
-      anchor.addEventListener('click',function(e){
+    // Smooth scrolling for navbar
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
         e.preventDefault();
-        const target=document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(this.getAttribute('href'));
         target.scrollIntoView({behavior:'smooth'});
       });
     });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.animate-text, .skill-card, .project-card, .insight-card').forEach(el => {
+      observer.observe(el);
+    });
   </script>
+
 </body>
 </html>
