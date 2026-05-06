@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Visual Designer & Brand Storyteller</title>
+    <style>
+        :root {
+            --midnight: #1a1a2e;
+            --indigo: #282B4A;
+            --vanilla-cream: #EEEBDA;
+            --bg: #0d0d1a;
+            --text: #EEEBDA;
+            --text-muted: #b5b19c;
+            --accent: #EEEBDA;
+            --card-bg: #18182b;
+            --border: rgba(238, 235, 218, 0.08);
+            --transition: cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--indigo);
+            border-radius: 4px;
+        }
+
+        /* NAVIGATION */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+            transition: all 0.5s var(--transition);
+            background: transparent;
+        }
+        .nav.scrolled {
+            background: rgba(13, 13, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 2rem;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.02em;
+            color: var(--vanilla-cream);
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+        .nav-logo:hover {
+            opacity: 1;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--vanilla-cream);
+            transition: width 0.4s var(--transition);
+        }
+        .nav-links a:hover {
+            color: var(--vanilla-cream);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-cta {
+            background: var(--vanilla-cream);
+            color: var(--midnight) !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+        .nav-cta:hover {
+            background: #fff;
+            color: #000 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(238, 235, 218, 0.15);
+        }
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .nav-toggle span {
+            width: 26px;
+            height: 2px;
+            background: var(--vanilla-cream);
+            transition: all 0.4s var(--transition);
+            border-radius: 2px;
+        }
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(40, 43, 74, 0.35) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-eyebrow {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--transition) 0.2s forwards;
+        }
+        .hero-name {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            color: var(--vanilla-cream);
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--transition) 0.4s forwards;
+        }
+        .hero-role {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--transition) 0.6s forwards;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--transition) 0.8s forwards;
+        }
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.4s var(--transition);
+            display: inline-block;
+        }
+        .btn-primary {
+            background: var(--vanilla-cream);
+            color: var(--midnight);
+        }
+        .btn-primary:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 235, 218, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--vanilla-cream);
+            border: 1.5px solid rgba(238, 235, 218, 0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--vanilla-cream);
+            background: rgba(238, 235, 218, 0.04);
+            transform: translateY(-3px);
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTION STYLES */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--vanilla-cream);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin-bottom: 3rem;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+        .about-text .highlight {
+            color: var(--vanilla-cream);
+            font-weight: 600;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.5s var(--transition);
+        }
+        .stat-card:hover {
+            border-color: rgba(238, 235, 218, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--vanilla-cream);
+            letter-spacing: -0.02em;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.4rem;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.8rem;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s var(--transition);
+            cursor: pointer;
+        }
+        .project-card:hover {
+            border-color: rgba(238, 235, 218, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+        .project-image {
+            width: 100%;
+            height: 300px;
+            background: var(--indigo);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            image-rendering: auto;
+            transition: transform 0.6s var(--transition);
+            background: var(--indigo);
+            padding: 0;
+        }
+        .project-card:hover .project-image img {
+            transform: scale(1.03);
+        }
+        .project-info {
+            padding: 1.5rem;
+        }
+        .project-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .project-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--vanilla-cream);
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+        .project-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--transition);
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .lightbox-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: 95vw;
+            max-height: 90vh;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            transform: scale(0.9);
+            transition: transform 0.4s var(--transition);
+            image-rendering: auto;
+        }
+        .lightbox.active img {
+            transform: scale(1);
+        }
+        .lightbox-hint {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            opacity: 0.6;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(238, 235, 218, 0.08);
+            border: 1px solid rgba(238, 235, 218, 0.2);
+            color: var(--vanilla-cream);
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 2001;
+        }
+        .lightbox-close:hover {
+            background: rgba(238, 235, 218, 0.18);
+        }
+
+        /* REVIEWS */
+        .reviews-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .reviews-scroll::-webkit-scrollbar {
+            height: 3px;
+        }
+        .reviews-scroll::-webkit-scrollbar-thumb {
+            background: var(--indigo);
+            border-radius: 3px;
+        }
+        .review-card {
+            min-width: 320px;
+            flex-shrink: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            scroll-snap-align: start;
+            transition: all 0.4s var(--transition);
+        }
+        .review-card:hover {
+            border-color: rgba(238, 235, 218, 0.25);
+        }
+        .review-stars {
+            color: #f0c040;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        .review-author {
+            font-weight: 700;
+            color: var(--vanilla-cream);
+            font-size: 0.95rem;
+        }
+        .review-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ANALYSIS */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .analysis-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.5s var(--transition);
+        }
+        .analysis-card:hover {
+            border-color: rgba(238, 235, 218, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        .analysis-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .analysis-title {
+            font-weight: 700;
+            color: var(--vanilla-cream);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .analysis-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* TECH STACK */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transition: all 0.5s var(--transition);
+        }
+        .tool-card:hover {
+            border-color: rgba(238, 235, 218, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+        .tool-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        .tool-info h3.tool-name {
+            color: var(--vanilla-cream);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .tool-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tool-tag {
+            background: rgba(238, 235, 218, 0.06);
+            border: 1px solid rgba(238, 235, 218, 0.1);
+            color: var(--text-muted);
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            transition: all 0.3s;
+        }
+        .tool-card:hover .tool-tag {
+            border-color: rgba(238, 235, 218, 0.2);
+            color: var(--vanilla-cream);
+        }
+        .tool-level {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: auto;
+        }
+        .level-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(238, 235, 218, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .level-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--vanilla-cream) 0%, rgba(238, 235, 218, 0.6) 100%);
+            border-radius: 4px;
+            transition: width 1s var(--transition);
+        }
+        .level-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            min-width: 70px;
+            text-align: right;
+        }
+
+        /* CONTACT */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .contact-info h3 {
+            color: var(--vanilla-cream);
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.01em;
+        }
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .contact-detail .icon-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--vanilla-cream);
+            flex-shrink: 0;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            color: var(--vanilla-cream);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.4s var(--transition);
+            resize: vertical;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: rgba(238, 235, 218, 0.4);
+            box-shadow: 0 0 0 4px rgba(238, 235, 218, 0.03);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+        }
+        .contact-form .btn {
+            align-self: flex-start;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--transition), transform 0.8s var(--transition);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: rgba(13, 13, 26, 0.97);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2.5rem;
+                transition: right 0.5s var(--transition);
+                z-index: 1000;
+                padding: 2rem;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            .about-grid,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero-name {
+                font-size: 2.5rem;
+            }
+            .section {
+                padding: 4rem 1.5rem;
+            }
+            .project-image {
+                height: 250px;
+            }
+            .projects-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .lightbox img {
+                max-width: 95vw;
+                max-height: 75vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" onclick="closeNav()">About</a></li>
+                <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+                <li><a href="#tools" onclick="closeNav()">Tools</a></li>
+                <li><a href="#reviews" onclick="closeNav()">Reviews</a></li>
+                <li><a href="#analysis" onclick="closeNav()">Analysis</a></li>
+                <li><a href="#contact" class="nav-cta" onclick="closeNav()">Let's Talk</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg-glow"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Visual Designer &amp; Brand Storyteller</p>
+            <h1 class="hero-name"><br>LUCID</h1>
+            <p class="hero-role">I craft bold identities and immersive digital experiences — built different, made for culture.</p>
+            <div class="hero-cta-group">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section reveal" id="about">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">The person behind the pixels.</h2>
+        <p class="section-subtitle">A self-taught designer who builds brands from a phone — no excuses, just results.</p>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>I'm a <span class="highlight">visual designer</span> passionate about creating clean, communicative brand identities that resonate. From streetwear to fintech, I translate bold ideas into polished visuals — all with the tools I have, wherever I am.</p>
+                <p>I believe design isn't about the gear — it's about the <span class="highlight">eye, the instinct, and the hunger</span> to make something unforgettable. I've built campaigns entirely on mobile, proving that creativity has no limits.</p>
+                <p>Currently open to opportunities in <span class="highlight">fintech, food &amp; beverage, and innovative startups</span> that need a designer who moves fast and thinks faster.</p>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card reveal"><div class="stat-number">2+</div><div class="stat-label">Years Creating</div></div>
+                <div class="stat-card reveal"><div class="stat-number">100%</div><div class="stat-label">Mobile-First</div></div>
+                <div class="stat-card reveal"><div class="stat-number">50+</div><div class="stat-label">Projects Done</div></div>
+                <div class="stat-card reveal"><div class="stat-number">24hr</div><div class="stat-label">Turnaround</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section reveal" id="projects">
+        <p class="section-label">Projects</p>
+        <h2 class="section-title">Selected work.</h2>
+        <p class="section-subtitle">14 projects spanning brand identity, campaign visuals, social media kits, and full brand packages. Click any image to inspect it full-size.</p>
+        <div class="projects-grid">
+
+            <!-- Project 1 -->
+            <div class="project-card reveal" onclick="openLightbox(0)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/spGLvjXB/9086201213083f9b77e37ef522b37ebb.jpg" alt="Onesearch Media" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Onesearch Media<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Brand Inquiry Visual</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Brand Identity</p>
+                    <h3 class="project-name">Onesearch Media — Brand Inquiry Visual</h3>
+                    <p class="project-desc">Clean contact-focused design for a media agency. Direct, professional, and built to convert inquiries.</p>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card reveal" onclick="openLightbox(1)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/Y7WXnjYr/303704ed177c68ccdf2a314606dae67a.jpg" alt="Brand Campaign" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Brand Campaign<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Social Media Suite</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Social Media Kit</p>
+                    <h3 class="project-name">Brand Campaign — Social Media Suite</h3>
+                    <p class="project-desc">Cohesive multi-platform visual suite designed for consistent brand storytelling across channels.</p>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card reveal" onclick="openLightbox(2)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/Vc2gvBy0/eb617d8b4cc2c746f739b72cb927cf4c.jpg" alt="Dreamlink" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Dreamlink<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>IELTS Promo Campaign</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Campaign Visual</p>
+                    <h3 class="project-name">Dreamlink — IELTS Promo Campaign</h3>
+                    <p class="project-desc">High-impact promotional design for an education brand. Bold pricing callout with clear CTA hierarchy.</p>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card reveal" onclick="openLightbox(3)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/KcMf0p9g/fa952c9ce1daa9cd0baf8598818933f1.jpg" alt="Product Launch" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Product Launch<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Visual Identity</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Brand Identity</p>
+                    <h3 class="project-name">Product Launch — Visual Identity</h3>
+                    <p class="project-desc">Complete visual identity package for a product launch. Clean, modern, and built to stand out.</p>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card reveal" onclick="openLightbox(4)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/rK7XMd2T/0f12018cd4cbf30ad400bca6391f52e3.jpg" alt="Event Flyer" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Event Flyer<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Dynamic Layout</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Event & Promotion</p>
+                    <h3 class="project-name">Event Flyer — Dynamic Layout</h3>
+                    <p class="project-desc">Bold event promotion with dynamic typography and clear information architecture.</p>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card reveal" onclick="openLightbox(5)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/xt85220X/be77bfb85b348736f1e4acc041b03677.jpg" alt="Corporate Branding" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Corporate Branding<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Clean Suite</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Corporate Branding</p>
+                    <h3 class="project-name">Corporate Branding — Clean Suite</h3>
+                    <p class="project-desc">Polished corporate identity package. Minimal, trustworthy, and designed for professional audiences.</p>
+                </div>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="project-card reveal" onclick="openLightbox(6)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/NwkKyDb/03472282a4e289cfd1c11c9b42e8f1eb.jpg" alt="Promotional Banner" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Promotional Banner<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Bold Typography</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Campaign Visual</p>
+                    <h3 class="project-name">Promotional Banner — Bold Typography</h3>
+                    <p class="project-desc">Eye-catching promotional banner with strong typographic hierarchy. Designed to stop the scroll.</p>
+                </div>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="project-card reveal" onclick="openLightbox(7)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/gbd90rMm/63cd6b83f38987c9e25bc402d37ac064.jpg" alt="Social Media Kit" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Social Media Kit<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Cohesive Series</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Social Media Kit</p>
+                    <h3 class="project-name">Social Media Kit — Cohesive Series</h3>
+                    <p class="project-desc">Multi-post social media series with consistent branding. Built for engagement across all platforms.</p>
+                </div>
+            </div>
+
+            <!-- Project 9 -->
+            <div class="project-card reveal" onclick="openLightbox(8)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/5hknhQch/0197b9b70a912dc299c3a8913f0d0c26.jpg" alt="Marketing Collateral" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Marketing Collateral<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Multi-format</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Marketing Collateral</p>
+                    <h3 class="project-name">Marketing Collateral — Multi-format</h3>
+                    <p class="project-desc">Versatile marketing materials adaptable across print and digital. One brand voice, multiple touchpoints.</p>
+                </div>
+            </div>
+
+            <!-- Project 10: Swaggu Brands -->
+            <div class="project-card reveal" onclick="openLightbox(9)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/LX39RmhM/file-000000009dbc7246aafb4016c0e574fc.png" alt="Swaggu Brands" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Swaggu Brands<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Street Culture Identity</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Brand Identity</p>
+                    <h3 class="project-name">Swaggu Brands — Street Culture Identity</h3>
+                    <p class="project-desc">Raw, unapologetic streetwear brand identity. Built different. Made for the culture.</p>
+                </div>
+            </div>
+
+            <!-- Project 11 -->
+            <div class="project-card reveal" onclick="openLightbox(10)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/KpnK3sJ9/20260226-134306.png" alt="Digital Poster" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Digital Poster<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Minimal Statement</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Digital Poster</p>
+                    <h3 class="project-name">Digital Poster — Minimal Statement</h3>
+                    <p class="project-desc">Minimalist digital poster with restrained color and maximum message clarity. Less is more.</p>
+                </div>
+            </div>
+
+            <!-- Project 12 -->
+            <div class="project-card reveal" onclick="openLightbox(11)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/k2hkSFHC/20260203-165856.png" alt="Brand Grid" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Brand Grid<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Curated Collection</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Social Media Kit</p>
+                    <h3 class="project-name">Brand Grid — Curated Collection</h3>
+                    <p class="project-desc">Curated Instagram grid design with visual rhythm. Every post connects to the next seamlessly.</p>
+                </div>
+            </div>
+
+            <!-- Project 13 -->
+            <div class="project-card reveal" onclick="openLightbox(12)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/FkdQD3G4/20260107-185828.jpg" alt="Campaign Visual" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Campaign Visual<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Immersive Layout</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Campaign Visual</p>
+                    <h3 class="project-name">Campaign Visual — Immersive Layout</h3>
+                    <p class="project-desc">Immersive campaign design with deep visual storytelling. Pulls the viewer into the brand's world.</p>
+                </div>
+            </div>
+
+            <!-- Project 14 -->
+            <div class="project-card reveal" onclick="openLightbox(13)">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/5WvYT8TZ/3c4815360f0ef670aafc29f7a7d4dda7.jpg" alt="Creative Suite" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:#EEEBDA;font-weight:700;font-size:1.2rem;text-align:center;padding:2rem;>Creative Suite<br><span style=color:#b5b19c;font-size:0.8rem;font-weight:400;>Full Brand Package</span></div>'">
+                </div>
+                <div class="project-info">
+                    <p class="project-tag">Full Brand Package</p>
+                    <h3 class="project-name">Creative Suite — Full Brand Package</h3>
+                    <p class="project-desc">End-to-end brand package from logo to social assets. Everything a brand needs to launch with confidence.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <div class="lightbox-container" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Project full view">
+            <p class="lightbox-hint">Click outside to close</p>
+        </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <section class="section reveal" id="tools">
+        <p class="section-label">Tech Stack</p>
+        <h2 class="section-title">Tools I build with.</h2>
+        <p class="section-subtitle">The apps and platforms that power my creative workflow — all mobile-friendly, all battle-tested.</p>
+        <div class="tools-grid">
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><path d="M16 12C16 9.79 17.79 8 20 8C22.21 8 24 9.79 24 12C24 14.21 22.21 16 20 16H16V12Z" fill="#EEEBDA" opacity="0.9"/><path d="M16 16C16 13.79 17.79 12 20 12C22.21 12 24 13.79 24 16C24 18.21 22.21 20 20 20C17.79 20 16 18.21 16 16Z" fill="#282B4A"/><path d="M16 20C16 17.79 17.79 16 20 16C22.21 16 24 17.79 24 20V28C24 30.21 22.21 32 20 32C17.79 32 16 30.21 16 28V20Z" fill="#EEEBDA" opacity="0.7"/><path d="M16 24C16 21.79 17.79 20 20 20C22.21 20 24 21.79 24 24C24 26.21 22.21 28 20 28H16V24Z" fill="#282B4A" opacity="0.7"/><path d="M16 24C16 21.79 17.79 20 20 20C22.21 20 24 21.79 24 24V28H20C17.79 28 16 26.21 16 24Z" fill="#EEEBDA" opacity="0.5"/></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">Figma</h3><p class="tool-desc">Industry-standard UI/UX design tool for prototyping, wireframing, and pixel-perfect interfaces.</p><div class="tool-tags"><span class="tool-tag">UI Design</span><span class="tool-tag">Prototyping</span><span class="tool-tag">Design Systems</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:90%"></div></div><span class="level-label">Advanced</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><rect x="8" y="8" width="10" height="10" rx="2" fill="#EEEBDA"/><rect x="22" y="8" width="10" height="10" rx="2" fill="#282B4A"/><rect x="8" y="22" width="10" height="10" rx="2" fill="#EEEBDA" opacity="0.6"/><rect x="22" y="22" width="10" height="10" rx="2" fill="#282B4A" opacity="0.6"/></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">PixelLab</h3><p class="tool-desc">My secret weapon. Powerhouse mobile design app for typography, text effects, and quick-turnaround graphics.</p><div class="tool-tags"><span class="tool-tag">Typography</span><span class="tool-tag">Mobile Design</span><span class="tool-tag">Quick Edits</span><span class="tool-tag">Posters</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:95%"></div></div><span class="level-label">Expert</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><path d="M12 12H28L12 28H28" stroke="#EEEBDA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">Framer</h3><p class="tool-desc">Interactive prototypes and stunning portfolio sites with animations and seamless transitions.</p><div class="tool-tags"><span class="tool-tag">Prototyping</span><span class="tool-tag">Web Design</span><span class="tool-tag">Animations</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:75%"></div></div><span class="level-label">Proficient</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><text x="20" y="27" text-anchor="middle" fill="#EEEBDA" font-size="20" font-weight="800" font-family="sans-serif">C</text></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">Canva</h3><p class="tool-desc">Rapid social media assets, presentations, and client-ready moodboards. Speed meets polish.</p><div class="tool-tags"><span class="tool-tag">Social Media</span><span class="tool-tag">Templates</span><span class="tool-tag">Presentations</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:88%"></div></div><span class="level-label">Advanced</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><text x="20" y="27" text-anchor="middle" fill="#EEEBDA" font-size="14" font-weight="800" font-family="sans-serif">AE</text></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">Adobe Express</h3><p class="tool-desc">Adobe-level quality on mobile. Quick image edits, background removal, and brand-consistent content.</p><div class="tool-tags"><span class="tool-tag">Image Editing</span><span class="tool-tag">Brand Kits</span><span class="tool-tag">Mobile</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:80%"></div></div><span class="level-label">Proficient</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><text x="20" y="27" text-anchor="middle" fill="#EEEBDA" font-size="18" font-weight="800" font-family="sans-serif">P</text></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">Picsart</h3><p class="tool-desc">All-in-one creative suite for photo manipulation, collage, and artistic effects.</p><div class="tool-tags"><span class="tool-tag">Photo Editing</span><span class="tool-tag">Collage</span><span class="tool-tag">Effects</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:72%"></div></div><span class="level-label">Proficient</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><rect x="10" y="14" width="14" height="12" rx="2" fill="#EEEBDA"/><polygon points="26,17 32,20 26,23" fill="#282B4A"/></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">CapCut</h3><p class="tool-desc">Motion graphics and short-form video. Animated brand assets, Reels, and TikTok-ready visuals.</p><div class="tool-tags"><span class="tool-tag">Video Editing</span><span class="tool-tag">Motion Graphics</span><span class="tool-tag">Social Content</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:78%"></div></div><span class="level-label">Proficient</span></div>
+            </div>
+
+            <div class="tool-card reveal">
+                <div class="tool-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#1a1a2e" stroke="#282B4A" stroke-width="1"/><circle cx="20" cy="20" r="10" stroke="#EEEBDA" stroke-width="2"/><circle cx="20" cy="20" r="5" fill="#282B4A"/><line x1="20" y1="6" x2="20" y2="12" stroke="#EEEBDA" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="28" x2="20" y2="34" stroke="#EEEBDA" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="20" x2="12" y2="20" stroke="#EEEBDA" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="20" x2="34" y2="20" stroke="#EEEBDA" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div class="tool-info"><h3 class="tool-name">Lightroom Mobile</h3><p class="tool-desc">Professional-grade color grading and correction. Perfect tone, contrast, and mood before layout.</p><div class="tool-tags"><span class="tool-tag">Color Grading</span><span class="tool-tag">Photo Editing</span><span class="tool-tag">Presets</span></div></div>
+                <div class="tool-level"><div class="level-bar"><div class="level-fill" style="width:85%"></div></div><span class="level-label">Advanced</span></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="section reveal" id="reviews">
+        <p class="section-label">Reviews</p>
+        <h2 class="section-title">What people say.</h2>
+        <p class="section-subtitle">Feedback from clients and collaborators I've worked with.</p>
+        <div class="reviews-scroll">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Delivered beyond expectations — and did it all from a phone! The turnaround speed was insane and the quality held up against designers with full studio setups."</p>
+                <p class="review-author">— Creative Director, Lagos</p><p class="review-role">Madison wears</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"I needed a fintech campaign visual urgently. I got two polished options within hours. Clean, professional, and exactly what our audience needed."</p>
+                <p class="review-author">— Head of Marketing</p><p class="review-role">Grey</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"The event flyer captured everything — date, theme, energy — in one glance. Registration numbers spiked the week it dropped."</p>
+                <p class="review-author">— Event Coordinator</p><p class="review-role">GCM Ghana</p>
+            </div>
+<div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"He designs clarity with pixels, nothing limits his creativity "</p>
+                <p class="review-author">— Startup founder</p><p class="review-role">Gauntlabs</p>
+            </div>
+            
+            
+            
+        </div>
+    </section>
+
+    <!-- ANALYSIS -->
+    <section class="section reveal" id="analysis">
+        <p class="section-label">Design Analysis</p>
+        <h2 class="section-title">How I think about design.</h2>
+        <p class="section-subtitle">My approach to visual communication — broken down into principles I live by.</p>
+        <div class="analysis-grid">
+            <div class="analysis-card reveal"><div class="analysis-icon">●</div><h3 class="analysis-title">Clarity Over Noise</h3><p class="analysis-desc">Every element must earn its place. I strip designs down to what communicates best — no filler, no clutter, just pure message.</p></div>
+            <div class="analysis-card reveal"><div class="analysis-icon">◈</div><h3 class="analysis-title">Culture-First Identity</h3><p class="analysis-desc">Design should feel like it belongs to the people it speaks to. I anchor every project in the culture and context of its audience.</p></div>
+            <div class="analysis-card reveal"><div class="analysis-icon">▣</div><h3 class="analysis-title">Speed Without Sacrifice</h3><p class="analysis-desc">Mobile creation taught me efficiency. I deliver polished work fast — in startups and fintech, speed wins.</p></div>
+            <div class="analysis-card reveal"><div class="analysis-icon">◎</div><h3 class="analysis-title">Dual-Mode Design</h3><p class="analysis-desc">I pivot between raw street aesthetics and clean corporate minimalism — whichever the brief demands.</p></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section reveal" id="contact">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Let's work together.</h2>
+        <p class="section-subtitle">Have a project, a gig, or an opportunity? I'd love to hear from you.</p>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Reach out directly.</h3>
+                <p>Available for freelance, contract, and full-time roles — especially in fintech, food &amp; beverage, and startups that move fast.</p>
+                <div class="contact-detail"><span class="icon-dot"></span>luciddesigns833@gmail.com</div>
+                <div class="contact-detail"><span class="icon-dot"></span>+234 707 244 3803</div>
+                <div class="contact-detail"><span class="icon-dot"></span> Lagos, Nigeria</div>
+            </div>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Tell me about your project or opportunity..." required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 LUCID designs. Built different. Made for the culture.</p>
+    </footer>
+
+    <script>
+        const projectImages = [
+            'https://i.ibb.co/spGLvjXB/9086201213083f9b77e37ef522b37ebb.jpg',
+            'https://i.ibb.co/Y7WXnjYr/303704ed177c68ccdf2a314606dae67a.jpg',
+            'https://i.ibb.co/Vc2gvBy0/eb617d8b4cc2c746f739b72cb927cf4c.jpg',
+            'https://i.ibb.co/KcMf0p9g/fa952c9ce1daa9cd0baf8598818933f1.jpg',
+            'https://i.ibb.co/rK7XMd2T/0f12018cd4cbf30ad400bca6391f52e3.jpg',
+            'https://i.ibb.co/xt85220X/be77bfb85b348736f1e4acc041b03677.jpg',
+            'https://i.ibb.co/NwkKyDb/03472282a4e289cfd1c11c9b42e8f1eb.jpg',
+            'https://i.ibb.co/gbd90rMm/63cd6b83f38987c9e25bc402d37ac064.jpg',
+            'https://i.ibb.co/5hknhQch/0197b9b70a912dc299c3a8913f0d0c26.jpg',
+            'https://i.ibb.co/LX39RmhM/file-000000009dbc7246aafb4016c0e574fc.png',
+            'https://i.ibb.co/KpnK3sJ9/20260226-134306.png',
+            'https://i.ibb.co/k2hkSFHC/20260203-165856.png',
+            'https://i.ibb.co/FkdQD3G4/20260107-185828.jpg',
+            'https://i.ibb.co/5WvYT8TZ/3c4815360f0ef670aafc29f7a7d4dda7.jpg'
+        ];
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(index) {
+            lightboxImg.src = projectImages[index];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+        });
+
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        function toggleNav() { navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active'); }
+
+        function closeNav() { navToggle.classList.remove('active');
+            navLinks.classList.remove('active'); }
+        document.addEventListener('click', (e) => { if (!nav.contains(e.target) && navLinks.classList.contains(
+                'active')) closeNav(); });
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { root: null, rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+        revealElements.forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const original = btn.textContent;
+            btn.textContent = 'Message Sent! ✓';
+            btn.style.background = '#3a5a40';
+            btn.style.color = '#EEEBDA';
+            setTimeout(() => { btn.textContent = original;
+                btn.style.background = '';
+                btn.style.color = '';
+                e.target.reset(); }, 2500);
+        }
+
+        const hero = document.querySelector('.hero');
+        const glow = document.querySelector('.hero-bg-glow');
+        if (hero && glow && window.innerWidth > 768) {
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const moveX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2) * 30;
+                const moveY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2) * 30;
+                glow.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+            });
+        }
+
+        console.log('%c Portfolio Live %c 14 projects • 8 tools • Ready for recruiters ',
+            'background:#EEEBDA;color:#1a1a2e;padding:6px 12px;border-radius:4px 0 0 4px;font-weight:600;',
+            'background:#282B4A;color:#EEEBDA;padding:6px 12px;border-radius:0 4px 4px 0;');
+    </script>
+</body>
+</html>
